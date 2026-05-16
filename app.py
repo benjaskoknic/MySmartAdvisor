@@ -36,57 +36,112 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap');
 
+/* ══════════════════════════════════════════════
+   DESIGN TOKENS — LIGHT (default)
+   ══════════════════════════════════════════════ */
 :root {
-    --blue-primary: #1A56DB;
-    --blue-dark: #0F3A8A;
-    --blue-light: #F0F8FF;        
-    --blue-light2: #C1E2FF; 
-    --red-accent: #E53E3E;
-    --white: #FFFFFF;
-    --gray-50: #F3F4F6; 
-    --gray-100: #F3F4F6;
-    --gray-200: #E5E7EB;
-    --gray-600: #4B5563;
-    --gray-800: #1F2937;
-    --gray-900: #111827;
-    --success: #10B981;
-    --warning: #F59E0B;
+    --blue-primary:      #1A56DB;
+    --blue-dark:         #0F3A8A;
+    --red-accent:        #E53E3E;
+    --success:           #10B981;
+    --warning:           #F59E0B;
+
+    --bg-canvas:         #FFFFFF;
+    --bg-card:           #F3F4F6;
+    --bg-card-blue:      linear-gradient(135deg, #EBF2FF, #DBEAFE);
+    --border-card-blue:  #BFDBFE;
+    --bg-sidebar:        #F0F8FF;
+    --bg-sidebar-card:   #C1E2FF;
+    --bg-question:       #F3F4F6;
+    --border-question:   #DBEAFE;
+    --border-divider:    #E5E7EB;
+    --border-input:      #E5E7EB;
+    --bg-radio:          #F3F4F6;
+    --bg-radio-hover:    #F0F8FF;
+    --bg-progress:       #E5E7EB;
+    --bg-disclaimer:     #FEF2F2;
+    --border-disclaimer: #E53E3E;
+    --text-disclaimer:   #7F1D1D;
+    --text-body:         #4B5563;
+    --text-heading:      #1F2937;
+    --text-heading-dark: #111827;
+    --text-muted:        #6B7280;
+    --text-sidebar-body: #374151;
+    --shadow-card:       0 1px 3px rgba(0,0,0,0.06), 0 4px 16px rgba(0,0,0,0.06);
+    --shadow-metric:     0 2px 8px rgba(0,0,0,0.05);
+    --shadow-question:   0 2px 12px rgba(26,86,219,0.07);
+    --chart-grid:        #E5E7EB;
+    --sidebar-title-color: #0F3A8A;
 }
 
-[data-theme="light"] {
-    --bg-main: #FFFFFF;
-}
-            
+/* ══════════════════════════════════════════════
+   DESIGN TOKENS — DARK OVERRIDE
+   Streamlit sets data-theme="dark" on <html> when
+   config.toml has base="dark" OR user picks dark.
+   ══════════════════════════════════════════════ */
 [data-theme="dark"] {
-    --bg-main: #1F3056;
-}
-            
-html, body, [class*="css"] {
-    font-family: 'DM Sans', sans-serif;
+    --blue-primary:      #3B82F6;
+    --blue-dark:         #1D4ED8;
+    --red-accent:        #F87171;
+    --success:           #34D399;
+    --warning:           #FBBF24;
+
+    --bg-canvas:         #0D1B2A;
+    --bg-card:           #162032;
+    --bg-card-blue:      linear-gradient(135deg, #152240, #1A2D50);
+    --border-card-blue:  #1E3A6E;
+    --bg-sidebar:        #0F1E30;
+    --bg-sidebar-card:   #1A2D50;
+    --bg-question:       #162032;
+    --border-question:   #1E3A6E;
+    --border-divider:    #1E3A6E;
+    --border-input:      #2A4070;
+    --bg-radio:          #162032;
+    --bg-radio-hover:    #1A2D50;
+    --bg-progress:       #1E3A6E;
+    --bg-disclaimer:     #2D1515;
+    --border-disclaimer: #C53030;
+    --text-disclaimer:   #FEB2B2;
+    --text-body:         #A0AEC0;
+    --text-heading:      #E2E8F0;
+    --text-heading-dark: #F7FAFC;
+    --text-muted:        #718096;
+    --text-sidebar-body: #CBD5E0;
+    --shadow-card:       0 1px 3px rgba(0,0,0,0.4), 0 4px 16px rgba(0,0,0,0.3);
+    --shadow-metric:     0 2px 8px rgba(0,0,0,0.3);
+    --shadow-question:   0 2px 12px rgba(0,0,0,0.3);
+    --chart-grid:        #1E3A6E;
+    --sidebar-title-color: #93C5FD;
 }
 
-/* Fondo contenedor principal */
+/* ══════════════════════════════════════════════
+   STREAMLIT CHROME
+   ══════════════════════════════════════════════ */
 [data-testid="stAppViewContainer"] {
-    background-color: var(--bg-main);
+    background-color: var(--bg-canvas) !important;
 }
-
-/* Fondo barra lateral */
 [data-testid="stSidebar"] {
-    background-color: var(--blue-light);
+    background-color: var(--bg-sidebar) !important;
 }
-            
-h1, h2, h3, h4 {
-    font-family: 'Syne', sans-serif;
-}
+[data-testid="stHeader"]     { background: transparent !important; }
+[data-testid="stDecoration"] { display: none !important; }
 
-/* Main background */
+/* ══════════════════════════════════════════════
+   GLOBAL
+   ══════════════════════════════════════════════ */
+html, body, [class*="css"] { font-family: 'DM Sans', sans-serif; }
+h1, h2, h3, h4              { font-family: 'Syne', sans-serif; }
+footer                      { visibility: hidden; }
+
 .main .block-container {
     padding-top: 2rem;
     padding-bottom: 2rem;
     max-width: 1200px;
 }
 
-/* Hero banner */
+/* ══════════════════════════════════════════════
+   HERO BANNER  (always dark-blue gradient — no change)
+   ══════════════════════════════════════════════ */
 .hero-banner {
     background: linear-gradient(135deg, #0F3A8A 0%, #1A56DB 60%, #2563EB 100%);
     border-radius: 20px;
@@ -95,7 +150,6 @@ h1, h2, h3, h4 {
     position: relative;
     overflow: hidden;
 }
-
 .hero-banner::before {
     content: '';
     position: absolute;
@@ -104,7 +158,6 @@ h1, h2, h3, h4 {
     background: rgba(255,255,255,0.05);
     border-radius: 50%;
 }
-
 .hero-banner::after {
     content: '';
     position: absolute;
@@ -113,7 +166,6 @@ h1, h2, h3, h4 {
     background: rgba(229,62,62,0.12);
     border-radius: 50%;
 }
-
 .hero-title {
     font-family: 'Syne', sans-serif;
     font-size: 2.8rem;
@@ -122,14 +174,12 @@ h1, h2, h3, h4 {
     margin: 0 0 0.5rem 0;
     letter-spacing: -0.5px;
 }
-
 .hero-subtitle {
     font-size: 1.1rem;
     color: rgba(255,255,255,0.75);
     margin: 0;
     font-weight: 300;
 }
-
 .hero-badge {
     display: inline-block;
     background: rgba(229,62,62,0.9);
@@ -144,90 +194,67 @@ h1, h2, h3, h4 {
     margin-bottom: 1rem;
 }
 
-/* Cards */
+/* ══════════════════════════════════════════════
+   CARDS
+   ══════════════════════════════════════════════ */
 .card {
-    background: var(--gray-50); /* Cambiado a gris claro */
+    background: var(--bg-card);
     border-radius: 16px;
     padding: 1.8rem;
-    border: 1px solid var(--gray-200);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04);
+    border: 1px solid var(--border-divider);
+    box-shadow: var(--shadow-card);
     margin-bottom: 1.2rem;
 }
-
 .card-blue {
-    background: linear-gradient(135deg, #EBF2FF, #DBEAFE);
-    border: 1px solid #BFDBFE;
+    background: var(--bg-card-blue);
+    border: 1px solid var(--border-card-blue);
 }
-
 .card-title {
     font-family: 'Syne', sans-serif;
     font-size: 1.1rem;
     font-weight: 700;
-    color: var(--gray-800);
+    color: var(--text-heading);
     margin-bottom: 0.5rem;
 }
 
-/* Metric cards */
-.metric-row {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
-}
-
-.metric-card {
+/* ══════════════════════════════════════════════
+   METRIC CARDS
+   ══════════════════════════════════════════════ */
+.metric-row   { display: flex; gap: 1rem; margin-bottom: 1.2rem; }
+.metric-card  {
     flex: 1;
-    background: var(--gray-50); /* Gris claro para las métricas */
+    background: var(--bg-card);
     border-radius: 14px;
     padding: 1.2rem 1.4rem;
-    border: 1px solid var(--gray-200);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    border: 1px solid var(--border-divider);
+    box-shadow: var(--shadow-metric);
 }
-
 .metric-label {
     font-size: 0.75rem;
-    color: var(--gray-600);
+    color: var(--text-muted);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.8px;
     margin-bottom: 0.3rem;
 }
-
 .metric-value {
     font-family: 'Syne', sans-serif;
     font-size: 1.6rem;
     font-weight: 700;
-    color: var(--gray-900);
+    color: var(--text-heading-dark);
 }
+.metric-delta { font-size: 0.8rem; color: var(--success); font-weight: 500; }
 
-.metric-delta {
-    font-size: 0.8rem;
-    color: var(--success);
-    font-weight: 500;
-}
+/* ══════════════════════════════════════════════
+   RISK SCORE
+   ══════════════════════════════════════════════ */
+.risk-score-display  { text-align: center; padding: 2rem; }
+.risk-score-number   { font-family: 'Syne', sans-serif; font-size: 4.5rem; font-weight: 800; color: var(--blue-primary); line-height: 1; }
+.risk-score-label    { font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; margin-top: 0.3rem; }
 
-/* Risk score */
-.risk-score-display {
-    text-align: center;
-    padding: 2rem;
-}
-
-.risk-score-number {
-    font-family: 'Syne', sans-serif;
-    font-size: 4.5rem;
-    font-weight: 800;
-    color: var(--blue-primary);
-    line-height: 1;
-}
-
-.risk-score-label {
-    font-size: 0.85rem;
-    color: var(--gray-600);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    margin-top: 0.3rem;
-}
-
-/* Profile badge */
+/* ══════════════════════════════════════════════
+   PROFILE BADGE
+   ══════════════════════════════════════════════ */
 .profile-badge {
     display: inline-block;
     padding: 0.6rem 1.4rem;
@@ -238,16 +265,17 @@ h1, h2, h3, h4 {
     margin: 1rem 0;
 }
 
-/* Question card */
+/* ══════════════════════════════════════════════
+   QUESTION CARD
+   ══════════════════════════════════════════════ */
 .question-card {
-    background: var(--gray-50); /* Gris claro para las preguntas */
+    background: var(--bg-question);
     border-radius: 16px;
     padding: 2rem;
-    border: 1.5px solid #DBEAFE;
+    border: 1.5px solid var(--border-question);
     margin-bottom: 1rem;
-    box-shadow: 0 2px 12px rgba(26,86,219,0.06);
+    box-shadow: var(--shadow-question);
 }
-
 .question-number {
     font-size: 0.7rem;
     color: var(--blue-primary);
@@ -256,71 +284,64 @@ h1, h2, h3, h4 {
     letter-spacing: 2px;
     margin-bottom: 0.5rem;
 }
-
 .question-text {
     font-family: 'Syne', sans-serif;
     font-size: 1.15rem;
     font-weight: 600;
-    color: var(--gray-800);
+    color: var(--text-heading);
     line-height: 1.4;
 }
 
-/* Sidebar */
+/* ══════════════════════════════════════════════
+   SIDEBAR CARDS
+   ══════════════════════════════════════════════ */
 .sidebar-section {
-    background: var(--blue-light2);
+    background: var(--bg-sidebar-card);
     border-radius: 12px;
     padding: 1rem 1.2rem;
     margin-bottom: 1rem;
     border-left: 3px solid var(--blue-primary);
 }
-
 .sidebar-title {
     font-family: 'Syne', sans-serif;
     font-size: 0.85rem;
     font-weight: 700;
-    color: var(--blue-dark);
+    color: var(--sidebar-title-color);
     margin-bottom: 0.4rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
+.sidebar-body { font-size: 0.82rem; color: var(--text-sidebar-body); line-height: 1.5; }
 
-/* Divider */
-.section-divider {
-    border: none;
-    border-top: 1px solid var(--gray-200);
-    margin: 2rem 0;
-}
-
-/* Progress bar */
-.progress-container {
-    background: var(--gray-200);
+.sidebar-disclaimer {
+    background: var(--bg-disclaimer);
     border-radius: 10px;
-    height: 6px;
-    margin: 0.8rem 0;
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--border-disclaimer);
+    font-size: 0.75rem;
+    color: var(--text-disclaimer);
+    line-height: 1.5;
+    margin-top: 1rem;
 }
 
-.progress-fill {
-    height: 6px;
-    border-radius: 10px;
-    background: linear-gradient(90deg, var(--blue-primary), #60A5FA);
-    transition: width 0.5s ease;
-}
+/* ══════════════════════════════════════════════
+   DIVIDER & PROGRESS
+   ══════════════════════════════════════════════ */
+.section-divider { border: none; border-top: 1px solid var(--border-divider); margin: 2rem 0; }
+.progress-container { background: var(--bg-progress); border-radius: 10px; height: 6px; margin: 0.8rem 0; }
+.progress-fill { height: 6px; border-radius: 10px; background: linear-gradient(90deg, var(--blue-primary), #60A5FA); transition: width 0.5s ease; }
 
-/* Stagger animations */
-@keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+/* ══════════════════════════════════════════════
+   ANIMATIONS
+   ══════════════════════════════════════════════ */
+@keyframes fadeSlideUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+.animate-in { animation: fadeSlideUp 0.5s ease forwards; }
 
-.animate-in {
-    animation: fadeSlideUp 0.5s ease forwards;
-}
+/* ══════════════════════════════════════════════
+   STREAMLIT WIDGET OVERRIDES
+   ══════════════════════════════════════════════ */
 
-/* Hide streamlit default elements */
-footer {visibility: hidden;}
-/* header {visibility: hidden;}
-
-/* Button styling */
+/* ── Buttons ── */
 .stButton > button {
     background: linear-gradient(135deg, #1A56DB, #2563EB);
     color: white;
@@ -334,42 +355,49 @@ footer {visibility: hidden;}
     transition: all 0.2s ease;
     box-shadow: 0 4px 12px rgba(26,86,219,0.3);
 }
-
 .stButton > button:hover {
     background: linear-gradient(135deg, #0F3A8A, #1A56DB);
     box-shadow: 0 6px 20px rgba(26,86,219,0.4);
     transform: translateY(-1px);
 }
 
-/* Radio buttons */
-.stRadio > div {
-    gap: 0.6rem;
-}
-
+/* ── Radio buttons ── */
+.stRadio > div { gap: 0.6rem; }
 .stRadio label {
-    background: var(--gray-50);
-    border: 1.5px solid var(--gray-200);
+    background: var(--bg-radio);
+    border: 1.5px solid var(--border-input);
     border-radius: 10px;
     padding: 0.7rem 1rem;
     cursor: pointer;
     transition: all 0.15s ease;
     font-size: 0.92rem;
+    color: var(--text-body);
 }
-
 .stRadio label:hover {
     border-color: var(--blue-primary);
-    background: var(--blue-light);
+    background: var(--bg-radio-hover);
 }
 
-/* Slider */
-.stSlider > div > div {
-    color: var(--blue-primary);
-}
+/* ── Slider & Selectbox ── */
+.stSlider > div > div     { color: var(--blue-primary); }
+.stSelectbox > div > div  { border-radius: 10px; border-color: var(--border-input); }
 
-/* Selectbox */
+/* ── Number input & selectbox ── */
+input[type="number"],
 .stSelectbox > div > div {
-    border-radius: 10px;
-    border-color: var(--gray-200);
+    border-color: var(--border-input) !important;
+    background-color: var(--bg-card) !important;
+    color: var(--text-heading) !important;
+}
+
+/* ── Expander ── */
+[data-testid="stExpander"] {
+    border-color: var(--border-input) !important;
+}
+
+/* ── Dataframe / table ── */
+[data-testid="stDataFrame"] {
+    background: var(--bg-card);
 }
 </style>
 """, unsafe_allow_html=True)
@@ -799,6 +827,39 @@ def compute_metrics(sim_df: pd.DataFrame, initial: float) -> dict:
 # CHARTS
 # ─────────────────────────────────────────────
 
+# ─────────────────────────────────────────────
+# THEME DETECTION & CHART HELPERS
+# ─────────────────────────────────────────────
+
+def _is_dark() -> bool:
+    """
+    Detect whether Streamlit is currently in dark mode.
+    config.toml sets base="dark", and users can toggle via the ⋮ menu.
+    Streamlit exposes the active theme through st.get_option (>= 1.27)
+    or falls back to the config value.
+    """
+    try:
+        theme = st.get_option("theme.base")
+        return theme == "dark"
+    except Exception:
+        return True  # default: dark (matches config.toml)
+
+def _chart_colors():
+    """Return a dict of chart-specific colors for the active theme."""
+    dark = _is_dark()
+    return {
+        "grid":       "#1E3A6E" if dark else "#E5E7EB",
+        "tick":       "#718096" if dark else "#6B7280",
+        "gauge_bg":   "#162032" if dark else "#F3F4F6",
+        "gauge_s1":   "#1E3A6E" if dark else "#DBEAFE",
+        "gauge_s2":   "#1A3560" if dark else "#BFDBFE",
+        "gauge_s3":   "#1A4070" if dark else "#BAE6FD",
+        "gauge_s4":   "#2D3A20" if dark else "#FDE68A",
+        "gauge_s5":   "#3D2020" if dark else "#FECACA",
+        "annotation": "#E2E8F0" if dark else "#1F2937",
+        "muted_text": "#718096" if dark else "#6B7280",
+    }
+
 CHART_TEMPLATE = dict(
     font_family="DM Sans",
     paper_bgcolor="rgba(0,0,0,0)",
@@ -807,12 +868,13 @@ CHART_TEMPLATE = dict(
 )
 
 def chart_gauge(score: float, profile_name: str) -> go.Figure:
+    c = _chart_colors()
     color_map = {
         "Muy Conservador": "#1A56DB",
-        "Conservador": "#2563EB",
-        "Moderado": "#0EA5E9",
-        "Agresivo": "#F59E0B",
-        "Muy Agresivo": "#E53E3E",
+        "Conservador":     "#2563EB",
+        "Moderado":        "#0EA5E9",
+        "Agresivo":        "#F59E0B",
+        "Muy Agresivo":    "#E53E3E",
     }
     color = color_map.get(profile_name, "#1A56DB")
 
@@ -821,20 +883,20 @@ def chart_gauge(score: float, profile_name: str) -> go.Figure:
         value=score,
         number={"suffix": " / 10", "font": {"size": 36, "family": "Syne", "color": color}},
         gauge={
-            "axis": {"range": [1, 10], "tickwidth": 1, "tickcolor": "#9CA3AF",
+            "axis": {"range": [1, 10], "tickwidth": 1, "tickcolor": c["tick"],
                      "tickfont": {"size": 11}},
             "bar": {"color": color, "thickness": 0.28},
-            "bgcolor": "#F3F4F6",
+            "bgcolor": c["gauge_bg"],
             "steps": [
-                {"range": [1, 2],  "color": "#DBEAFE"},
-                {"range": [2, 4],  "color": "#BFDBFE"},
-                {"range": [4, 6],  "color": "#BAE6FD"},
-                {"range": [6, 8],  "color": "#FDE68A"},
-                {"range": [8, 10], "color": "#FECACA"},
+                {"range": [1, 2],  "color": c["gauge_s1"]},
+                {"range": [2, 4],  "color": c["gauge_s2"]},
+                {"range": [4, 6],  "color": c["gauge_s3"]},
+                {"range": [6, 8],  "color": c["gauge_s4"]},
+                {"range": [8, 10], "color": c["gauge_s5"]},
             ],
             "threshold": {"line": {"color": color, "width": 3}, "value": score},
         },
-        title={"text": f"<b>Risk Score</b><br><span style='font-size:13px;color:#6B7280'>{profile_name}</span>",
+        title={"text": f"<b>Risk Score</b><br><span style='font-size:13px;color:{c['muted_text']}'>{profile_name}</span>",
                "font": {"size": 16, "family": "Syne"}},
     ))
     fig.update_layout(height=280, **CHART_TEMPLATE)
@@ -842,6 +904,7 @@ def chart_gauge(score: float, profile_name: str) -> go.Figure:
 
 
 def chart_pie(weights: dict, profile_name: str) -> go.Figure:
+    c = _chart_colors()
     labels = list(weights.keys())
     values = [v * 100 for v in weights.values()]
     colors = ["#1A56DB", "#E53E3E", "#0EA5E9", "#F59E0B", "#10B981", "#8B5CF6"]
@@ -856,23 +919,23 @@ def chart_pie(weights: dict, profile_name: str) -> go.Figure:
         texttemplate="%{label}<br><b>%{value:.0f}%</b>",
     ))
     fig.update_layout(
-        title=dict(text=f"<b>Composición del Portafolio</b><br><span style='color:#6B7280;font-size:12px'>{profile_name}</span>",
+        title=dict(text=f"<b>Composición del Portafolio</b><br><span style='color:{c['muted_text']};font-size:12px'>{profile_name}</span>",
                    font=dict(size=15, family="Syne"), x=0.5),
         height=340,
         showlegend=False,
         **CHART_TEMPLATE
     )
     fig.add_annotation(text=f"<b>{profile_name}</b>", x=0.5, y=0.5,
-                       font=dict(size=11, family="Syne", color="#1F2937"),
+                       font=dict(size=11, family="Syne", color=c["annotation"]),
                        showarrow=False)
     return fig
 
 
 def chart_portfolio_vs_spy(sim_portfolio: pd.DataFrame, sim_spy: pd.DataFrame,
                             profile_name: str) -> go.Figure:
+    c = _chart_colors()
     fig = go.Figure()
 
-    # Normalize to 100 for comparison
     port_norm = sim_portfolio["value"] / sim_portfolio["value"].iloc[0] * 100
     spy_norm  = sim_spy["value"]  / sim_spy["value"].iloc[0]  * 100
 
@@ -889,10 +952,10 @@ def chart_portfolio_vs_spy(sim_portfolio: pd.DataFrame, sim_spy: pd.DataFrame,
     ))
 
     fig.update_layout(
-        title=dict(text="<b>Portafolio vs. Benchmark (SPY)</b><br><span style='color:#6B7280;font-size:12px'>Rendimiento normalizado (base 100)</span>",
+        title=dict(text=f"<b>Portafolio vs. Benchmark (SPY)</b><br><span style='color:{c['muted_text']};font-size:12px'>Rendimiento normalizado (base 100)</span>",
                    font=dict(size=15, family="Syne"), x=0),
-        xaxis=dict(showgrid=True, gridcolor="#F3F4F6", title=""),
-        yaxis=dict(showgrid=True, gridcolor="#F3F4F6", title="Valor (base 100)"),
+        xaxis=dict(showgrid=True, gridcolor=c["grid"], title=""),
+        yaxis=dict(showgrid=True, gridcolor=c["grid"], title="Valor (base 100)"),
         legend=dict(orientation="h", y=1.12, x=0, bgcolor="rgba(0,0,0,0)"),
         height=380,
         **CHART_TEMPLATE
@@ -902,12 +965,9 @@ def chart_portfolio_vs_spy(sim_portfolio: pd.DataFrame, sim_spy: pd.DataFrame,
 
 def chart_growth_simulation(sim_df: pd.DataFrame, initial: float,
                               monthly: float, profile_name: str) -> go.Figure:
+    c = _chart_colors()
     fig = go.Figure()
 
-    # Baseline: no returns (just contributions)
-    n_months = len(sim_df) // 21
-    contribution_curve = [initial + monthly * i for i in range(n_months)]
-    # Resample sim to monthly
     sim_monthly = sim_df["value"].resample("ME").last()
 
     fig.add_trace(go.Scatter(
@@ -925,10 +985,10 @@ def chart_growth_simulation(sim_df: pd.DataFrame, initial: float,
     ))
 
     fig.update_layout(
-        title=dict(text=f"<b>Simulación de Crecimiento</b><br><span style='color:#6B7280;font-size:12px'>Capital inicial ${initial:,.0f} + ${monthly:,.0f}/mes</span>",
+        title=dict(text=f"<b>Simulación de Crecimiento</b><br><span style='color:{c['muted_text']};font-size:12px'>Capital inicial ${initial:,.0f} + ${monthly:,.0f}/mes</span>",
                    font=dict(size=15, family="Syne"), x=0),
-        xaxis=dict(showgrid=True, gridcolor="#F3F4F6"),
-        yaxis=dict(showgrid=True, gridcolor="#F3F4F6",
+        xaxis=dict(showgrid=True, gridcolor=c["grid"]),
+        yaxis=dict(showgrid=True, gridcolor=c["grid"],
                    tickprefix="$", tickformat=",.0f"),
         legend=dict(orientation="h", y=1.12, x=0),
         height=360,
@@ -938,32 +998,33 @@ def chart_growth_simulation(sim_df: pd.DataFrame, initial: float,
 
 
 def chart_feature_importance(model, features) -> go.Figure:
+    c = _chart_colors()
     importance = model.feature_importances_
     labels = {
-        "loss_aversion": "Aversión a Pérdidas",
+        "loss_aversion":    "Aversión a Pérdidas",
         "prob_sensitivity": "Sens. Probabilística",
         "volatility_react": "Reacción a Volatilidad",
-        "time_preference": "Preferencia Temporal",
-        "uncertainty_avoid": "Evitación Incertidumbre",
+        "time_preference":  "Preferencia Temporal",
+        "uncertainty_avoid":"Evitación Incertidumbre",
         "risk_reward_bias": "Sesgo Riesgo/Retorno",
     }
     names = [labels.get(f, f) for f in features]
     sorted_idx = np.argsort(importance)
-    colors = ["#DBEAFE", "#BFDBFE", "#93C5FD", "#60A5FA", "#3B82F6", "#1A56DB"]
+    bar_colors = ["#DBEAFE", "#BFDBFE", "#93C5FD", "#60A5FA", "#3B82F6", "#1A56DB"]
 
     fig = go.Figure(go.Bar(
         y=[names[i] for i in sorted_idx],
         x=[importance[i] for i in sorted_idx],
         orientation="h",
-        marker=dict(color=[colors[i % len(colors)] for i in range(len(sorted_idx))],
+        marker=dict(color=[bar_colors[i % len(bar_colors)] for i in range(len(sorted_idx))],
                     line=dict(color="white", width=0.5)),
         text=[f"{importance[i]:.1%}" for i in sorted_idx],
         textposition="outside",
     ))
     fig.update_layout(
-        title=dict(text="<b>Importancia de Variables</b><br><span style='color:#6B7280;font-size:12px'>Contribución al modelo ML</span>",
+        title=dict(text=f"<b>Importancia de Variables</b><br><span style='color:{c['muted_text']};font-size:12px'>Contribución al modelo ML</span>",
                    font=dict(size=14, family="Syne"), x=0),
-        xaxis=dict(tickformat=".0%", showgrid=True, gridcolor="#F3F4F6"),
+        xaxis=dict(tickformat=".0%", showgrid=True, gridcolor=c["grid"]),
         yaxis=dict(autorange="reversed"),
         height=280,
         **CHART_TEMPLATE
@@ -979,15 +1040,15 @@ def render_sidebar():
     with st.sidebar:
         st.markdown("""
         <div style='text-align:center; padding: 1rem 0 1.5rem 0;'>
-            <span style='font-family:Syne;font-size:1.5rem;font-weight:800;color:#1A56DB;'>My</span><span style='font-family:Syne;font-size:1.5rem;font-weight:800;color:#1F2937;'>Smart</span><span style='font-family:Syne;font-size:1.5rem;font-weight:800;color:#E53E3E;'>Advisor</span>
-            <div style='font-size:0.7rem;color:#6B7280;letter-spacing:2px;text-transform:uppercase;margin-top:2px;'>Behavioral Finance AI</div>
+            <span style='font-family:Syne;font-size:1.5rem;font-weight:800;color:#1A56DB;'>My</span><span style='font-family:Syne;font-size:1.5rem;font-weight:800;color:var(--text-heading);'>Smart</span><span style='font-family:Syne;font-size:1.5rem;font-weight:800;color:#E53E3E;'>Advisor</span>
+            <div style='font-size:0.7rem;color:var(--text-muted);letter-spacing:2px;text-transform:uppercase;margin-top:2px;'>Behavioral Finance AI</div>
         </div>
         """, unsafe_allow_html=True)
 
         st.markdown("""
         <div class='sidebar-section'>
             <div class='sidebar-title'>🧠 Behavioral Economics</div>
-            <div style='font-size:0.82rem;color:#374151;line-height:1.5;'>
+            <div class='sidebar-body'>
             Este sistema aplica <strong>Prospect Theory</strong> (Kahneman & Tversky) para modelar cómo las personas evalúan pérdidas y ganancias de forma asimétrica. La aversión a pérdidas, sesgos de disponibilidad y preferencias de tiempo son variables clave del análisis.
             </div>
         </div>
@@ -996,7 +1057,7 @@ def render_sidebar():
         st.markdown("""
         <div class='sidebar-section'>
             <div class='sidebar-title'>🤖 Machine Learning</div>
-            <div style='font-size:0.82rem;color:#374151;line-height:1.5;'>
+            <div class='sidebar-body'>
             Usamos un <strong>Decision Tree Classifier</strong> entrenado con 600+ registros sintéticos de perfiles conductuales. Las respuestas del cuestionario se transforman en 6 dimensiones psicológicas que el modelo usa para clasificar el perfil de riesgo.
             </div>
         </div>
@@ -1005,7 +1066,7 @@ def render_sidebar():
         st.markdown("""
         <div class='sidebar-section'>
             <div class='sidebar-title'>📊 Tecnologías</div>
-            <div style='font-size:0.82rem;color:#374151;line-height:1.6;'>
+            <div class='sidebar-body'>
             🐍 Python · Streamlit<br>
             📈 yfinance · Plotly<br>
             🤖 scikit-learn<br>
@@ -1015,7 +1076,7 @@ def render_sidebar():
         """, unsafe_allow_html=True)
 
         st.markdown("""
-        <div style='background:#FEF2F2;border-radius:10px;padding:0.9rem 1.1rem;border-left:3px solid #E53E3E;font-size:0.75rem;color:#7F1D1D;line-height:1.5;margin-top:1rem;'>
+        <div class='sidebar-disclaimer'>
             ⚠️ <strong>Disclaimer</strong><br>
             Esta plataforma tiene fines exclusivamente educativos y no constituye asesoría financiera real. Las simulaciones son históricas y no garantizan rendimientos futuros.
         </div>
@@ -1029,7 +1090,7 @@ def render_sidebar():
             total_steps = 3
             progress_pct = int((step / total_steps) * 100)
             st.markdown(f"""
-            <div style='font-size:0.75rem;color:#6B7280;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;'>Progreso</div>
+            <div style='font-size:0.75rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px;'>Progreso</div>
             <div class='progress-container'>
                 <div class='progress-fill' style='width:{progress_pct}%;'></div>
             </div>
@@ -1070,7 +1131,7 @@ def main():
             <div class='card card-blue'>
                 <div style='font-size:2rem;margin-bottom:0.5rem;'>🧠</div>
                 <div class='card-title'>Perfilamiento Conductual</div>
-                <div style='font-size:0.85rem;color:#4B5563;'>Analizamos tu psicología financiera usando principios de Prospect Theory y Behavioral Economics.</div>
+                <div style='font-size:0.85rem;color:var(--text-body);'>Analizamos tu psicología financiera usando principios de Prospect Theory y Behavioral Economics.</div>
             </div>
             """, unsafe_allow_html=True)
         with col2:
@@ -1078,7 +1139,7 @@ def main():
             <div class='card card-blue'>
                 <div style='font-size:2rem;margin-bottom:0.5rem;'>🤖</div>
                 <div class='card-title'>IA & Machine Learning</div>
-                <div style='font-size:0.85rem;color:#4B5563;'>Un Decision Tree Classifier clasifica tu perfil entre 5 niveles de riesgo con alta precisión.</div>
+                <div style='font-size:0.85rem;color:var(--text-body);'>Un Decision Tree Classifier clasifica tu perfil entre 5 niveles de riesgo con alta precisión.</div>
             </div>
             """, unsafe_allow_html=True)
         with col3:
@@ -1086,7 +1147,7 @@ def main():
             <div class='card card-blue'>
                 <div style='font-size:2rem;margin-bottom:0.5rem;'>📊</div>
                 <div class='card-title'>Datos Reales de Mercado</div>
-                <div style='font-size:0.85rem;color:#4B5563;'>Portafolios con ETFs reales, simulaciones históricas y benchmark contra el S&P 500.</div>
+                <div style='font-size:0.85rem;color:var(--text-body);'>Portafolios con ETFs reales, simulaciones históricas y benchmark contra el S&P 500.</div>
             </div>
             """, unsafe_allow_html=True)
 
@@ -1100,7 +1161,7 @@ def main():
 
         st.markdown("""
         <div style='text-align:center;margin-top:2rem;'>
-            <span style='font-size:0.8rem;color:#9CA3AF;'>⏱ &nbsp;12 preguntas · ~4 minutos · Resultados inmediatos</span>
+            <span style='font-size:0.8rem;color:var(--text-muted);'>⏱ &nbsp;12 preguntas · ~4 minutos · Resultados inmediatos</span>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1108,22 +1169,22 @@ def main():
         st.markdown("<hr class='section-divider'>", unsafe_allow_html=True)
         st.markdown("""
         <div style='text-align:center;margin-bottom:1.5rem;'>
-            <span style='font-family:Syne;font-size:1.2rem;font-weight:700;color:#1F2937;'>¿Cómo funciona el sistema?</span>
+            <span style='font-family:Syne;font-size:1.2rem;font-weight:700;color:var(--text-heading-dark);'>¿Cómo funciona el sistema?</span>
         </div>
         """, unsafe_allow_html=True)
 
-        steps_html = "<div style='display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;'>"
         process_steps = [
             ("01", "Cuestionario Conductual", "Responde 12 preguntas basadas en dilemas financieros reales"),
             ("02", "Análisis Psicológico", "El sistema mide 6 dimensiones conductuales clave"),
             ("03", "Clasificación ML", "Un árbol de decisión determina tu perfil de riesgo"),
             ("04", "Portafolio Personalizado", "Recibe una cartera con ETFs reales y datos históricos"),
         ]
+        steps_html = "<div style='display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;'>"
         for num, title, desc in process_steps:
-            steps_html += f"<div style='flex:1;min-width:180px;background:var(--gray-50);border-radius:14px;padding:1.2rem;border:1px solid var(--gray-200);text-align:center;'>"
-            steps_html += f"<div style='font-family:Syne;font-size:2rem;font-weight:800;color:#DBEAFE;'>{num}</div>"
-            steps_html += f"<div style='font-family:Syne;font-size:0.9rem;font-weight:700;color:#1F2937;margin-bottom:0.3rem;'>{title}</div>"
-            steps_html += f"<div style='font-size:0.78rem;color:#6B7280;'>{desc}</div>"
+            steps_html += f"<div style='flex:1;min-width:180px;background:var(--bg-card);border-radius:14px;padding:1.2rem;border:1px solid var(--border-divider);text-align:center;'>"
+            steps_html += f"<div style='font-family:Syne;font-size:2rem;font-weight:800;color:var(--blue-primary);opacity:0.25;'>{num}</div>"
+            steps_html += f"<div style='font-family:Syne;font-size:0.9rem;font-weight:700;color:var(--text-heading);margin-bottom:0.3rem;'>{title}</div>"
+            steps_html += f"<div style='font-size:0.78rem;color:var(--text-muted);'>{desc}</div>"
             steps_html += "</div>"
         steps_html += "</div>"
         st.markdown(steps_html, unsafe_allow_html=True)
@@ -1142,8 +1203,8 @@ def main():
     elif step == 1:
         st.markdown("""
         <div style='margin-bottom:2rem;'>
-            <div style='font-family:Syne;font-size:1.8rem;font-weight:800;color:#1F2937;'>Análisis Conductual</div>
-            <div style='color:#6B7280;font-size:0.95rem;margin-top:0.3rem;'>Responde con honestidad. No hay respuestas correctas o incorrectas — cada elección revela algo sobre tu psicología financiera.</div>
+            <div style='font-family:Syne;font-size:1.8rem;font-weight:800;color:var(--text-heading-dark);'>Análisis Conductual</div>
+            <div style='color:var(--text-muted);font-size:0.95rem;margin-top:0.3rem;'>Responde con honestidad. No hay respuestas correctas o incorrectas — cada elección revela algo sobre tu psicología financiera.</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -1182,7 +1243,7 @@ def main():
                              and st.session_state[f"radio_{q['id']}"] is not None)
         st.markdown(f"""
         <div style='margin-bottom:1.5rem;'>
-            <div style='font-size:0.8rem;color:#6B7280;margin-bottom:6px;'>{answered_count} / {len(QUESTIONS)} preguntas respondidas</div>
+            <div style='font-size:0.8rem;color:#718096;margin-bottom:6px;'>{answered_count} / {len(QUESTIONS)} preguntas respondidas</div>
             <div class='progress-container'>
                 <div class='progress-fill' style='width:{int(answered_count/len(QUESTIONS)*100)}%;'></div>
             </div>
@@ -1241,10 +1302,10 @@ def main():
                     margin-bottom:2rem;'>
             <div style='font-size:0.7rem;color:{pcolor};font-weight:700;letter-spacing:2px;
                         text-transform:uppercase;margin-bottom:0.5rem;'>✦ Tu perfil detectado</div>
-            <div style='font-family:Syne;font-size:2.5rem;font-weight:800;color:#1F2937;'>
+            <div style='font-family:Syne;font-size:2.5rem;font-weight:800;color: var(--text-heading);'>
                 {profile_data['emoji']} {profile_data['name']}
             </div>
-            <div style='font-size:0.95rem;color:#6B7280;margin-top:0.3rem;'>
+            <div style='font-size:0.95rem;color:#718096;margin-top:0.3rem;'>
                 Risk Score: <strong style='color:{pcolor};font-family:Syne;font-size:1.1rem;'>{risk_score:.1f} / 10</strong>
                 &nbsp;·&nbsp; Horizonte recomendado: <strong>{profile_data['horizon']}</strong>
                 &nbsp;·&nbsp; Retorno esperado: <strong>{profile_data['expected_return']}</strong>
@@ -1264,7 +1325,7 @@ def main():
         # ── BEHAVIORAL ANALYSIS ──
         st.markdown("<hr class='section-divider'>", unsafe_allow_html=True)
         st.markdown("""
-        <div style='font-family:Syne;font-size:1.3rem;font-weight:700;color:#1F2937;margin-bottom:1rem;'>
+        <div style='font-family:Syne;font-size:1.3rem;font-weight:700;color:var(--text-heading);margin-bottom:1rem;'>
             🧠 Análisis Psicológico-Conductual
         </div>
         """, unsafe_allow_html=True)
@@ -1274,7 +1335,7 @@ def main():
             st.markdown(f"""
             <div class='card'>
                 <div class='card-title'>🔬 Perfil Psicológico</div>
-                <div style='font-size:0.87rem;color:#4B5563;line-height:1.6;margin-top:0.5rem;'>
+                <div style='font-size:0.87rem;color:#A0AEC0;line-height:1.6;margin-top:0.5rem;'>
                     {profile_data['psychology']}
                 </div>
             </div>
@@ -1283,7 +1344,7 @@ def main():
             st.markdown(f"""
             <div class='card'>
                 <div class='card-title'>📐 Sesgos Conductuales</div>
-                <div style='font-size:0.87rem;color:#4B5563;line-height:1.6;margin-top:0.5rem;'>
+                <div style='font-size:0.87rem;color:#A0AEC0;line-height:1.6;margin-top:0.5rem;'>
                     {profile_data['behavioral']}
                 </div>
             </div>
@@ -1302,6 +1363,7 @@ def main():
         radar_vals = [features_dict[f] for f in feature_order]
         radar_labels = [dim_labels[f] for f in feature_order]
 
+        _c = _chart_colors()
         fig_radar = go.Figure(go.Scatterpolar(
             r=radar_vals + [radar_vals[0]],
             theta=radar_labels + [radar_labels[0]],
@@ -1312,8 +1374,11 @@ def main():
         ))
         fig_radar.update_layout(
             polar=dict(
-                radialaxis=dict(visible=True, range=[0, 10], tickfont=dict(size=9)),
-                angularaxis=dict(tickfont=dict(size=11, family="DM Sans"))
+                radialaxis=dict(visible=True, range=[0, 10], tickfont=dict(size=9),
+                                gridcolor=_c["grid"], linecolor=_c["grid"]),
+                angularaxis=dict(tickfont=dict(size=11, family="DM Sans"),
+                                 gridcolor=_c["grid"], linecolor=_c["grid"]),
+                bgcolor="rgba(0,0,0,0)",
             ),
             showlegend=False,
             title=dict(text="<b>Dimensiones Conductuales</b>",
@@ -1326,7 +1391,7 @@ def main():
         # ── PORTFOLIO COMPOSITION TABLE ──
         st.markdown("<hr class='section-divider'>", unsafe_allow_html=True)
         st.markdown("""
-        <div style='font-family:Syne;font-size:1.3rem;font-weight:700;color:#1F2937;margin-bottom:1rem;'>
+        <div style='font-family:Syne;font-size:1.3rem;font-weight:700;color:var(--text-heading);margin-bottom:1rem;'>
             💼 Portafolio Recomendado
         </div>
         """, unsafe_allow_html=True)
@@ -1353,7 +1418,7 @@ def main():
         # ── SIMULATION PARAMETERS ──
         st.markdown("<hr class='section-divider'>", unsafe_allow_html=True)
         st.markdown("""
-        <div style='font-family:Syne;font-size:1.3rem;font-weight:700;color:#1F2937;margin-bottom:1rem;'>
+        <div style='font-family:Syne;font-size:1.3rem;font-weight:700;color:var(--text-heading);margin-bottom:1rem;'>
             📈 Simulación Financiera
         </div>
         """, unsafe_allow_html=True)
@@ -1457,7 +1522,7 @@ def main():
         # ── ML MODEL INFO ──
         st.markdown("<hr class='section-divider'>", unsafe_allow_html=True)
         st.markdown("""
-        <div style='font-family:Syne;font-size:1.3rem;font-weight:700;color:#1F2937;margin-bottom:1rem;'>
+        <div style='font-family:Syne;font-size:1.3rem;font-weight:700;color:var(--text-heading);margin-bottom:1rem;'>
             🤖 Modelo de Machine Learning
         </div>
         """, unsafe_allow_html=True)
@@ -1485,7 +1550,7 @@ def main():
                 st.rerun()
 
         st.markdown("""
-        <div style='text-align:center;margin-top:1rem;font-size:0.75rem;color:#9CA3AF;'>
+        <div style='text-align:center;margin-top:1rem;font-size:0.75rem;color:#718096;'>
             MySmartAdvisor · Behavioral Finance AI · Fines educativos únicamente
         </div>
         """, unsafe_allow_html=True)

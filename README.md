@@ -61,6 +61,8 @@ MySmartAdvisor/
 ├── app.py              # Aplicación principal (monolítica para simplicidad)
 ├── requirements.txt    # Dependencias Python
 └── README.md           # Este archivo
+└── .streamlit/
+    └── config.toml        
 ```
 
 ---
