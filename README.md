@@ -152,4 +152,4 @@ Desarrollado como prototipo académico de **Behavioral Finance + AI** para demos
 
 ---
 
-*MySmartAdvisor · Behavioral Finance AI · 2024*
+*MySmartAdvisor · Behavioral Finance AI · 2026*

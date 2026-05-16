@@ -19,11 +19,14 @@ warnings.filterwarnings('ignore')
 # ─────────────────────────────────────────────
 # PAGE CONFIG
 # ─────────────────────────────────────────────
+if "sidebar_state" not in st.session_state:
+    st.session_state.sidebar_state = "expanded"
+
 st.set_page_config(
     page_title="MySmartAdvisor",
     page_icon="💎",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state=st.session_state.sidebar_state
 )
 
 # ─────────────────────────────────────────────
@@ -36,10 +39,11 @@ st.markdown("""
 :root {
     --blue-primary: #1A56DB;
     --blue-dark: #0F3A8A;
-    --blue-light: #EBF2FF;
+    --blue-light: #F0F8FF;        
+    --blue-light2: #C1E2FF; 
     --red-accent: #E53E3E;
     --white: #FFFFFF;
-    --gray-50: #F9FAFB;
+    --gray-50: #F3F4F6; 
     --gray-100: #F3F4F6;
     --gray-200: #E5E7EB;
     --gray-600: #4B5563;
@@ -49,10 +53,28 @@ st.markdown("""
     --warning: #F59E0B;
 }
 
+[data-theme="light"] {
+    --bg-main: #FFFFFF;
+}
+            
+[data-theme="dark"] {
+    --bg-main: #1F3056;
+}
+            
 html, body, [class*="css"] {
     font-family: 'DM Sans', sans-serif;
 }
 
+/* Fondo contenedor principal */
+[data-testid="stAppViewContainer"] {
+    background-color: var(--bg-main);
+}
+
+/* Fondo barra lateral */
+[data-testid="stSidebar"] {
+    background-color: var(--blue-light);
+}
+            
 h1, h2, h3, h4 {
     font-family: 'Syne', sans-serif;
 }
@@ -124,7 +146,7 @@ h1, h2, h3, h4 {
 
 /* Cards */
 .card {
-    background: white;
+    background: var(--gray-50); /* Cambiado a gris claro */
     border-radius: 16px;
     padding: 1.8rem;
     border: 1px solid var(--gray-200);
@@ -154,7 +176,7 @@ h1, h2, h3, h4 {
 
 .metric-card {
     flex: 1;
-    background: white;
+    background: var(--gray-50); /* Gris claro para las métricas */
     border-radius: 14px;
     padding: 1.2rem 1.4rem;
     border: 1px solid var(--gray-200);
@@ -218,7 +240,7 @@ h1, h2, h3, h4 {
 
 /* Question card */
 .question-card {
-    background: white;
+    background: var(--gray-50); /* Gris claro para las preguntas */
     border-radius: 16px;
     padding: 2rem;
     border: 1.5px solid #DBEAFE;
@@ -245,7 +267,7 @@ h1, h2, h3, h4 {
 
 /* Sidebar */
 .sidebar-section {
-    background: var(--blue-light);
+    background: var(--blue-light2);
     border-radius: 12px;
     padding: 1rem 1.2rem;
     margin-bottom: 1rem;
@@ -295,9 +317,8 @@ h1, h2, h3, h4 {
 }
 
 /* Hide streamlit default elements */
-#MainMenu {visibility: hidden;}
 footer {visibility: hidden;}
-header {visibility: hidden;}
+/* header {visibility: hidden;}
 
 /* Button styling */
 .stButton > button {
@@ -782,7 +803,7 @@ CHART_TEMPLATE = dict(
     font_family="DM Sans",
     paper_bgcolor="rgba(0,0,0,0)",
     plot_bgcolor="rgba(0,0,0,0)",
-    margin=dict(l=20, r=20, t=40, b=20),
+    margin=dict(l=20, r=20, t=100, b=20),
 )
 
 def chart_gauge(score: float, profile_name: str) -> go.Figure:
@@ -872,7 +893,7 @@ def chart_portfolio_vs_spy(sim_portfolio: pd.DataFrame, sim_spy: pd.DataFrame,
                    font=dict(size=15, family="Syne"), x=0),
         xaxis=dict(showgrid=True, gridcolor="#F3F4F6", title=""),
         yaxis=dict(showgrid=True, gridcolor="#F3F4F6", title="Valor (base 100)"),
-        legend=dict(orientation="h", y=1.12, x=0),
+        legend=dict(orientation="h", y=1.12, x=0, bgcolor="rgba(0,0,0,0)"),
         height=380,
         **CHART_TEMPLATE
     )
@@ -1026,6 +1047,7 @@ def main():
         st.session_state["step"] = 0
     if "answers" not in st.session_state:
         st.session_state["answers"] = {}
+  
 
     render_sidebar()
     model, accuracy, features, df = train_model()
@@ -1090,9 +1112,7 @@ def main():
         </div>
         """, unsafe_allow_html=True)
 
-        steps_html = """
-        <div style='display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;'>
-        """
+        steps_html = "<div style='display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;'>"
         process_steps = [
             ("01", "Cuestionario Conductual", "Responde 12 preguntas basadas en dilemas financieros reales"),
             ("02", "Análisis Psicológico", "El sistema mide 6 dimensiones conductuales clave"),
@@ -1100,13 +1120,11 @@ def main():
             ("04", "Portafolio Personalizado", "Recibe una cartera con ETFs reales y datos históricos"),
         ]
         for num, title, desc in process_steps:
-            steps_html += f"""
-            <div style='flex:1;min-width:180px;background:white;border-radius:14px;padding:1.2rem;border:1px solid #E5E7EB;text-align:center;'>
-                <div style='font-family:Syne;font-size:2rem;font-weight:800;color:#DBEAFE;'>{num}</div>
-                <div style='font-family:Syne;font-size:0.9rem;font-weight:700;color:#1F2937;margin-bottom:0.3rem;'>{title}</div>
-                <div style='font-size:0.78rem;color:#6B7280;'>{desc}</div>
-            </div>
-            """
+            steps_html += f"<div style='flex:1;min-width:180px;background:var(--gray-50);border-radius:14px;padding:1.2rem;border:1px solid var(--gray-200);text-align:center;'>"
+            steps_html += f"<div style='font-family:Syne;font-size:2rem;font-weight:800;color:#DBEAFE;'>{num}</div>"
+            steps_html += f"<div style='font-family:Syne;font-size:0.9rem;font-weight:700;color:#1F2937;margin-bottom:0.3rem;'>{title}</div>"
+            steps_html += f"<div style='font-size:0.78rem;color:#6B7280;'>{desc}</div>"
+            steps_html += "</div>"
         steps_html += "</div>"
         st.markdown(steps_html, unsafe_allow_html=True)
 
@@ -1325,7 +1343,7 @@ def main():
         portfolio_rows = []
         for ticker, weight in profile_data["assets"].items():
             portfolio_rows.append({
-                "Ticker": f"**{ticker}**",
+                "Ticker": f"{ticker}",
                 "Descripción": etf_info.get(ticker, ticker),
                 "Asignación": f"{weight*100:.0f}%",
             })
