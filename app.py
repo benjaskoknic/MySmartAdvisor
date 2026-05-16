@@ -571,9 +571,9 @@ QUESTIONS = [
         "behavioral": "prob_sensitivity",
         "options": [
             ("Recibir $5.000 garantizados hoy", 1),
-            ("70% de probabilidad de ganar $8.000 (sino, $0)", 4),
-            ("50% de probabilidad de ganar $12.000 (sino, $0)", 7),
-            ("20% de probabilidad de ganar $30.000 (sino, $0)", 9),
+            ("70% de probabilidad de ganar \$8.000 (sino, \$0)", 4),
+            ("50% de probabilidad de ganar \$12.000 (sino, \$0)", 7),
+            ("20% de probabilidad de ganar \$30.000 (sino, \$0)", 9),
         ]
     },
     {
