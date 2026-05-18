@@ -129,19 +129,6 @@ La teoría prospectos describe cómo las personas evalúan pérdidas y ganancias
 
 ---
 
-## 📸 Screenshots sugeridos
-
-Al documentar el proyecto, incluir capturas de:
-
-1. **Landing page** — Hero banner con las 3 propuestas de valor
-2. **Cuestionario** — Una pregunta conductual con opciones de radio
-3. **Dashboard de resultados** — Gauge + pie chart del portafolio
-4. **Análisis conductual** — Radar de dimensiones psicológicas
-5. **Benchmark chart** — Portafolio vs SPY en gráfico temporal
-6. **Simulación** — Curva de crecimiento con aportes mensuales
-
----
-
 ## ⚠️ Disclaimer
 
 > Esta plataforma tiene fines **exclusivamente educativos** y **no constituye asesoría financiera real**. Las simulaciones son históricas y no garantizan rendimientos futuros. Siempre consulta a un asesor financiero certificado antes de tomar decisiones de inversión.
